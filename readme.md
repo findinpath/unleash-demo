@@ -95,6 +95,60 @@ Go to the [Unleash Admin UI](http://localhost:4242/) and create several feature 
 - `specialGreeting` with custom made `deviceClass` strategy. Create before the `deviceClass` strategy with the parameter `device` of type `list`.
 When configuring the strategy for the `specialGreeting` feature toggle, enter `Desktop` and `Tablet` values in the preffered values for the `device` parameter.
 
+Once these steps were performed, then check that the output coming from the Unleash server is similar to:
+
+```
+➜  ~ curl -s http://localhost:4242/api/client/features | jq
+{
+  "version": 1,
+  "features": [
+    {
+      "name": "blueHeader",
+      "description": "",
+      "enabled": true,
+      "strategies": [
+        {
+          "name": "default"
+        }
+      ],
+      "variants": null,
+      "createdAt": "2020-09-30T21:20:46.154Z"
+    },
+    {
+      "name": "qotd",
+      "description": "Quote of the day",
+      "enabled": true,
+      "strategies": [
+        {
+          "name": "userWithId",
+          "parameters": {
+            "userIds": "bob,john"
+          }
+        }
+      ],
+      "variants": null,
+      "createdAt": "2020-09-30T21:34:37.612Z"
+    },
+    {
+      "name": "specialGreeting",
+      "description": "",
+      "enabled": true,
+      "strategies": [
+        {
+          "name": "deviceClass",
+          "parameters": {
+            "device": "Desktop,Tablet"
+          }
+        }
+      ],
+      "variants": null,
+      "createdAt": "2020-10-01T20:03:16.114Z"
+    }
+  ]
+}
+
+```
+
 Start the Spring Boot web application
 
 ```
